@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/cart.css">
+    <title>Order Done</title>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="logo">
+            <p class="order">ORDER
+            <span class="done">DONE<i class="fa-solid fa-check fa-xl"></i></span></p>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="shop.html">SHOP</a></li>
+            <li><a href="fav.html">FAVOURITES</a></li>
+            <li><a href="cart.html">CART</a></li>
+            <li><a href="contact.html">CONTACT US</a></li>
+        </ul>
+        <p class="menu-btn"><i class="fa-solid fa-bars"></i></p>
+    </nav>
+
+    <!-- CART ITEM -->
+    <h1>Your Cart</h1>
+    <div id="cart-items"></div>
+
+    <div id="cart-summary">
+        <div>
+            <p>Total Items: </p>
+            <p id="total-items">0</p>
+        </div>
+        <div>
+            <p>Subtotal: </p>
+            <span>Rs. <span id="subtotal">0</span></span>
+        </div>
+        <div>
+            <p>Delivery Charges: </p>
+            <span>Rs. <span>250</span></span>
+        </div>
+        <div>
+            <p><strong>Final Total: </strong></p>
+            <strong><span>Rs. <span id="final-total">0</span></span></strong>
+        </div>
+        <div class="grey">
+            <p>Payment Type:</p>
+            <span>Cash on delivery</span>
+        </div>
+        <p class="p"><button id="next-btn">Next</button></p>
+    </div>
+
+    <!-- FORM -->
+    <form class="order-form" style="display: none;">
+        <input type="text" id="name" placeholder="Full Name" required /> <br>
+        <input type="email" id="gmail" placeholder="Gmail" required /> <br>
+        <input type="tel" id="number" placeholder="Phone Number" required /> <br>
+        <input type="text" id="city" placeholder="City" required /> <br>
+        <input type="text" id="address" placeholder="Address" required /> <br>
+        <input type="text" id="block" placeholder="Block / House No" required /> <br>
+        <input type="text" id="zip" placeholder="Postal / Zip Code" required /> <br>
+        <button type="submit" id="send-btn">Send</button>
+    </form>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+</body>
+    <script src="js/firebase.js"></script>
+    <script src="js/cart.js"></script>
+</html>

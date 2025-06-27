@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/shop.css">
+    <title>Order Done</title>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="logo">
+            <p class="order">ORDER
+            <span class="done">DONE<i class="fa-solid fa-check fa-xl"></i></span></p>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="shop.html">SHOP</a></li>
+            <li><a href="fav.html">FAVOURITES</a></li>
+            <li><a href="cart.html">CART</a></li>
+            <li><a href="contact.html">CONTACT US</a></li>
+        </ul>
+        <p class="menu-btn"><i class="fa-solid fa-bars"></i></p>
+    </nav>
+
+    <!-- SEARCH BAR -->
+    <div class="container">
+        <div class="input">
+            <input type="text" id="search" placeholder="Search..."><i class="fa-solid fa-magnifying-glass" id="btn"></i>
+        </div>
+
+        <!-- CARD -->
+        <div class="best">
+            <!-- <div class="card">
+            <img src="./img/foldable table.jpg" alt="" class="img">
+            <p class="heart">
+                <i class="fa-regular fa-heart"></i>
+            </p>
+            <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta ratione, sint iste enim ullam nemo...</p>
+            <div class="inline">
+                <p class="price"><span>Rs</span>.2000 <span class="cut">3200</span> <span>🔥</span></p>
+                <button class="add"><i class="fa-solid fa-cart-shopping"></i></button>
+            </div>
+            </div> -->
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+    <div class="footer-newsletter">
+        <h1>Stay Updated</h1>
+        <div>
+            <input type="email" placeholder="Your email">
+            <button>Subscribe</button>
+        </div>
+        <div class="footer-social">
+            <i class="fa-brands fa-facebook"></i>
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-whatsapp"></i>
+        </div>
+    </div>
+    <hr>
+    <div class="footer-link">
+        <div class="fl">
+            <h2>Quick Links</h2>
+            <ul class="footer-links">
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="shop.html">SHOP</a></li>
+                <li><a href="cart.html">CART</a></li>
+                <li><a href="contact.html">CONTACT US</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-about">
+            <h2>About Us</h2>
+            <p>Order Done brings you top-quality products at unbeatable prices, with fast delivery and reliable service.</p>
+        </div>
+    </div>
+    <hr>
+    <p>&copy; 2025 Order Done. All rights reserved.</p>
+    </footer>
+
+    <!-- CART BAR -->
+    <div class="cart-bar" id="cart-bar" style="display: none;">
+        <div>
+            <p>Items: <span id="item-count">0</span></p>
+            <p>PKR: <span id="total-price">0</span></p>
+        </div>
+        <button class="checkout-btn"><a href="cart.html">Checkout</a></button>
+    </div>
+    
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+</body>
+<script src="js/firebase.js"></script>
+<script src="js/product.js"></script>
+<script src="js/shop.js"></script>
+</html>
