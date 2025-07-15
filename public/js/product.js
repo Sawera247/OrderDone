@@ -183,5 +183,86 @@ const products = [
         img: "./img/foldable table.jpg",
         description: "Foldable wood laptop table — sturdy, portable, and space-saving design for home or office use.",
         price:{current: 1250, og: 1599}
-    }
+    },
+    {
+        img: "./img/ice shaver (gola ganda).jpg",
+        description: "Premium Quality Ice Shaver — Effortless, fast, and fun way to make refreshing shaved ice at home. Box packed!",
+        price:{current: 1350, og: 1699}
+    },
+    {
+        img: "./img/veg cutter.jpg",
+        description: "Vegetable Slicer — Slice, shred, and cut veggies fast and evenly. A kitchen essential!",
+        price:{current: 1250, og: 1599}
+    },
+    {
+        img: "./img/water mat.jpg",
+        description: "Water Play Mat for Kids — Fun, mess-free tummy time and sensory play at home!",
+        price:{current: 620, og: 950}
+    },
+    {
+        img: "./img/bubble gun.jpg",
+        description: "Bazooka Bubble Gun (32-Hole) — Shoots endless bubbles for nonstop fun! Box included.",
+        price:{current: 669, og: 1000}
+    },
+    {
+        img: "./img/jewel box.jpg",
+        description: "4-Layer Jewelry Box — Built-in mirror, smart design, and spacious storage. Multicolor (random).",
+        price:{current: 620, og: 950}
+    },
+    {
+        img: "./img/rotate jewel box.jpg",
+        description: "Large 4-Layer Rotating Jewelry Box — Durable, stackable organizer with spacious storage. (Random color).",
+        price:{current: 620, og: 950}
+    },
+    {
+        img: "./img/kids color set.jpg",
+        description: "42-Piece Drawing Kit — Complete art set for kids with colors, pencils & more! Random design & colors.",
+        price:{current: 500, og: 850}
+    },
+    {
+        img: "./img/sheet.jpg",
+        description: "Multi-Purpose Sheet — Use as fridge mat, table cover, or cushion liner. Comes in random colors!",
+        price:{current: 259, og: 600}
+    },
+    {
+        img: "./img/dust stopper.jpg",
+        description: "Door Bottom Seal Strip (35mm) — Blocks dust & insects. Easy to install. Random color!",
+        price:{current: 150, og: 360}
+    },
+    {
+        img: "./img/store box.jpg",
+        description: "Panda Storage Box — Foldable, spacious, and perfect for organizing! Random design.",
+        price:{current: 220, og: 560}
+    },
+    {
+        img: "./img/shopper storage.jpg",
+        description: "Mesh Hanging Kitchen Bag — Perfect for storing plastic bags, or waste. Random color!",
+        price:{current: 150, og: 360}
+    },
+    {
+        img: "./img/toy storage.jpg",
+        description: "Sturdy Foldable Storage Box — Foldable cardboard design for toys, clothes, or books.",
+        price:{current: 220, og: 560}
+    },
+    {
+        img: "./img/plastic stool.jpg",
+        description: "Telescopic Folding Stool — Lightweight, foldable, and easy to carry. Comes in a box!",
+        price:{current: 1850, og: 2200}
+    },
+    {
+        img: "./img/tiny box.jpg",
+        description: "Capto Storage Jar (2800ML) — Large-capacity, airtight, and ideal for kitchen storage!",
+        price:{current: 320, og: 680}
+    },
+    {
+        img: "./img/bike cover.jpg",
+        description: "Waterproof Bike Cover — Perfect fit for 70cc bikes. Protects against rain, dust, and sun!",
+        price:{current: 480, og: 880}
+    },
+    {
+        img: "./img/washing machine cover.jpg",
+        description: "Large Washing Machine Cover — Waterproof, dustproof, and perfect for big-size machines!",
+        price:{current: 620, og: 980}
+    },
 ];
+
