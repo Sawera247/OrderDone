@@ -97,7 +97,7 @@ const products = [
     {
         img: "./img/straightener .jpg",
         description: "5-in-1 Hot Air Styler — straightens, curls, dries, combs, and massages. All-in-one hair tool with box included.",
-        price:{current: 2499, og: 3499}
+        price:{current: 2399, og: 3499}
     },
     {
         img: "./img/Crystals Table Lamp.jpg",
@@ -264,5 +264,95 @@ const products = [
         description: "Large Washing Machine Cover — Waterproof, dustproof, and perfect for big-size machines!",
         price:{current: 620, og: 980}
     },
+    {
+        img: "./img/washing machine cover single.jpg",
+        description: "Washing Machine Cover — Waterproof, dustproof, and perfect for normal-size machines!",
+        price:{current: 460, og: 840}
+    },
+    {
+        img: "./img/cutter with strainer.jpg",
+        description: "Vegetable Cutter and Rotating Strainer — 7-in-1 tool includes grater, slicer, and rotating rinse basket.",
+        price:{current: 900, og: 1499}
+    },
+    {
+        img: "./img/electric comb.jpg",
+        description: "Electric Hair Straightener Brush — smooth, style, and detangle in one go.",
+        price:{current: 720, og: 1299}
+    },
+    {
+        img: "./img/cutter 5 in 1.jpg",
+        description: "Vegetable Cutter with 5 Stainless Steel Blades — slice, dice, and shred with ease.",
+        price:{current: 500, og: 850}
+    },
+    {
+        img: "./img/machine feet.jpg",
+        description: "4 Pcs Washing Machine Feet Pads — reduce noise, movement, and floor damage.",
+        price:{current: 250, og: 580}
+    },
+    {
+        img: "./img/weight scale.jpg",
+        description: "Digital Kitchen Weight Scale — measure ingredients perfectly, accurate and easy-to-use.",
+        price:{current: 820, og: 1299}
+    },
+    {
+        img: "./img/water dispenser.jpg",
+        description: "Electric Water Dispenser — one-touch pump, mess-free water access.",
+        price:{current: 580, og: 899}
+    },
+    {
+        img: "./img/laptop table.jpg",
+        description: "Wooden Bed Table — portable and foldable for laptops, meals, or study.",
+        price:{current: 1199, og: 1599}
+    },
+    {
+        img: "./img/bottle blender.jpg",
+        description: "Mini Juicer Blender — portable, USB-powered, and easy to carry anywhere.",
+        price:{current: 860, og: 1299}
+    },
+    {
+        img: "./img/toilet brush.jpg",
+        description: "Bathroom Cleaning Brush — non-slip handle and durable plastic bristles.",
+        price:{current: 200, og: 499}
+    },
+    {
+        img: "./img/bear wall cup .jpg",
+        description: "Bear-Shaped Toothbrush Holder — wall-mounted cup, space-saving, and easy to install.",
+        price:{current: 160, og: 380}
+    },
+    {
+        img: "./img/bleach bowl.jpg",
+        description: "6-in-1 Facial Mask Set — includes bowl, spatula, brush, puff, and spoon.",
+        price:{current: 250, og: 560}
+    },
+    {
+        img: "./img/nail filer.jpg",
+        description: "Nail Buffer Set — smooth, shape, and shine with durable sponge files.",
+        price:{current: 150, og: 360}
+    },
+    {
+        img: "./img/anti lice comb.jpg",
+        description: "Lice Removal Comb — strong grip and fine stainless steel bristles.",
+        price:{current: 150, og: 360}
+    },
+    {
+        img: "./img/brush.jpg",
+        description: "Hair Dying Brush Kit — includes 3 tools for smooth and even dye application.",
+        price:{current: 150, og: 360}
+    },
+    {
+        img: "./img/foot filer.jpg",
+        description: "4-in-1 Foot File — callus remover, scrubber, and pedicure tool for smooth feet.",
+        price:{current: 150, og: 360}
+    },
+    {
+        img: "./img/foot file.jpg",
+        description: "Double-Sided Foot File — professional wooden callus remover for smooth feet.",
+        price:{current: 200, og: 480}
+    },
+    {
+        img: "./img/foot scraper.jpg",
+        description: "Stainless Steel Foot Care Tool — scraper, clipper, and exfoliator in one",
+        price:{current: 200, og: 480}
+    }
 ];
 
