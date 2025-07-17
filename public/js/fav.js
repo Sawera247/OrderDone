@@ -1,11 +1,11 @@
-// ✅ NAVBAR MENU
+// NAVBAR MENU
 let menuBtn = document.querySelector('.menu-btn');
 let navLinks = document.querySelector('.nav-links');
 menuBtn.addEventListener('click', () => {
   navLinks.classList.toggle('mobile-menu');
 });
 
-// ✅ FAVOURITES LOAD FROM FIREBASE
+// FAVOURITES LOAD FROM FIREBASE
 const favContainer = document.querySelector('.fav-best');
 favContainer.innerHTML = '';
 
@@ -22,8 +22,13 @@ db.ref('favourites').on('value', snapshot => {
     const card = document.createElement('div');
     card.classList.add('card');
 
+    card.addEventListener('click', () => {
+      localStorage.setItem("selectedProductId", product.id);
+      window.location.href = "product-detail.html";
+    });
+
     card.innerHTML = `
-      <img src="${product.img}" alt="" class="img">
+      <img src="${product.img[0]}" alt="" class="img">
       <p class="heart" data-key="${key}"><i class="fa-solid fa-heart"></i></p>
       <p class="description">${product.description}</p>
       <div class="inline">
@@ -38,7 +43,7 @@ db.ref('favourites').on('value', snapshot => {
 
     favContainer.appendChild(card);
 
-    // ✅ ADD TO CART
+    // ADD TO CART
     const addBtn = card.querySelector('.add');
     addBtn.addEventListener('click', () => {
       const productToAdd = {
@@ -52,7 +57,7 @@ db.ref('favourites').on('value', snapshot => {
       });
     });
 
-    // ✅ UNLIKE FROM FAV
+    // UNLIKE FROM FAV
     const heartBtn = card.querySelector('.heart');
     heartBtn.addEventListener('click', () => {
       const key = heartBtn.getAttribute('data-key');
@@ -61,7 +66,7 @@ db.ref('favourites').on('value', snapshot => {
   });
 });
 
-// ✅ DESCRIPTION TOGGLE
+// DESCRIPTION TOGGLE
 document.addEventListener('click', function (e) {
   if (e.target.classList.contains('description') || e.target.classList.contains('img')) {
     const card = e.target.closest('.card');
@@ -70,7 +75,7 @@ document.addEventListener('click', function (e) {
   }
 });
 
-// ✅ SEARCH BAR FOR FAVOURITES
+//  SEARCH BAR FOR FAVOURITES
 let searchBar = document.getElementById('search');
 let searchBtn = document.getElementById('btn');
 
@@ -102,7 +107,7 @@ searchBtn?.addEventListener('click', () => {
   searchBar.value = '';
 });
 
-// ✅ CART BAR UPDATE
+// CART BAR UPDATE
 function updateCartBar() {
   db.ref('cart').once('value', snapshot => {
     const cart = snapshot.val() || {};
@@ -127,5 +132,5 @@ function updateCartBar() {
   });
 }
 
-// ✅ INIT
+//  INIT
 updateCartBar();

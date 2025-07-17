@@ -1,11 +1,11 @@
-// ✅ NAVBAR MENU
+//  NAVBAR MENU
 let menuBtn = document.querySelector('.menu-btn');
 let navLinks = document.querySelector('.nav-links');
 menuBtn.addEventListener('click', () => {
   navLinks.classList.toggle('mobile-menu');
 });
 
-// ✅ CART
+//  CART
 const cartItemsDiv = document.getElementById('cart-items');
 const totalItemsText = document.getElementById('total-items');
 const subtotalText = document.getElementById('subtotal');

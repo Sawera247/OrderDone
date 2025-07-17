@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Birthstone&family=Reddit+Sans:ital,wght@0,200..900;1,200..900&display=swap');
+
+.color-options {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.color-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  margin: 5px 5px 0 0;
+  background-color: #eee;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+}

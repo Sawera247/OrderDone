@@ -1,11 +1,11 @@
-// ✅ NAVBAR MENU
+// NAVBAR MENU
 let menuBtn = document.querySelector('.menu-btn');
 let navLinks = document.querySelector('.nav-links');
 menuBtn.addEventListener('click', () => {
   navLinks.classList.toggle('mobile-menu');
 });
 
-// ✅ CARD RENDERING
+// CARD RENDERING
 const bestContainer = document.querySelector('.best');
 bestContainer.innerHTML = '';
 
@@ -15,8 +15,13 @@ shuffledProducts.forEach(product => {
   const card = document.createElement('div');
   card.classList.add('card');
 
+  card.addEventListener('click', () => {
+    localStorage.setItem("selectedProductId", product.id);
+    window.location.href = "product-detail.html";
+  });
+
   card.innerHTML = `
-    <img src="${product.img}" alt="" class="img">
+    <img src="${product.img[0]}" alt="" class="img">
     <p class="heart"><i class="fa-regular fa-heart"></i></p>
     <p class="description">${product.description}</p>
     <div class="inline">
@@ -45,7 +50,7 @@ shuffledProducts.forEach(product => {
   });
 });
 
-// ✅ HEART AND DESC TOGGLE
+// HEART AND DESC TOGGLE
 document.addEventListener('click', function (e) {
   if (e.target.closest('.heart')) {
     const icon = e.target.closest('.heart').querySelector('i');
@@ -88,7 +93,7 @@ document.addEventListener('click', function (e) {
   }
 });
 
-// ✅ SEARCH
+// SEARCH
 let searchBar = document.getElementById('search');
 let searchBtn = document.getElementById('btn');
 
@@ -120,7 +125,7 @@ searchBtn?.addEventListener('click', () => {
   searchBar.value = '';
 });
 
-// ✅ CART BAR UPDATE
+// CART BAR 
 function updateCartBar() {
   db.ref('cart').once('value', snapshot => {
     const cart = snapshot.val() || {};
@@ -145,5 +150,6 @@ function updateCartBar() {
   });
 }
 
-// ✅ INIT
+// INIT
 updateCartBar();
+
