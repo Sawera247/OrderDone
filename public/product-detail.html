@@ -10,23 +10,25 @@
 <body>
 
     <!-- BAR -->
-    <div>
+    <div class="nav">
         <i class="fa-solid fa-arrow-left"></i>
     </div>
 
     <!-- PRODUCT DETAIL -->
     <div class="container">
         <div class="slider-container">
-            <button id="prev">←</button>
             <img id="slider-image" src="" alt="Product Image" />
+            <button id="prev">←</button>
             <button id="next">→</button>
         </div>
-        <p id="prod-descrip"></p>
-        <div class="line">
-            <p id="prod-price"></p>
-            <i class="fa-regular fa-heart"></i>
-        </div>
+        <div class="detail">
+            <p id="prod-descrip"></p>
+            <div class="line">
+                <p id="prod-price"></p>
+                <i class="fa-regular fa-heart"></i>
+            </div>
         <button class="prod-addToCard"></button>
+        </div>
     </div>
 
     <!-- CARD -->
@@ -44,6 +46,9 @@
         </div> -->
     </div>
     
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+
 </body>
     <script src="js/firebase.js"></script>
     <script src="js/product.js"></script>

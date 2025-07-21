@@ -1,4 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // Back Arrow Logic
+  const backArrow = document.querySelector(".fa-arrow-left");
+  backArrow.addEventListener("click", () => {
+    window.history.back();
+  });
+
+  // Product Detail Logic
   const productId = localStorage.getItem("selectedProductId");
   const product = products.find((p) => p.id === productId);
 
@@ -20,18 +27,21 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentIndex = 0;
   const media = product.img;
 
+  if (media.length <= 1) {
+    prevBtn.style.display = "none";
+    nextBtn.style.display = "none";
+  }
+
   function showMedia(index) {
     const file = media[index];
     const ext = file.split('.').pop().toLowerCase();
 
-    // Clear old media
     productSlider.querySelectorAll("img, video").forEach(el => el.remove());
 
     if (ext === "mp4") {
       const video = document.createElement("video");
       video.src = file;
       video.controls = true;
-      video.width = 300;
       productSlider.appendChild(video);
     } else {
       const img = document.createElement("img");
@@ -56,7 +66,6 @@ document.addEventListener("DOMContentLoaded", () => {
   desc.textContent = product.description;
   price.innerHTML = `<span>Rs</span>.${product.price.current} <span class="cut">${product.price.og}</span>`;
 
-  // 🔥 Show available colors
   if (product.color && Array.isArray(product.color)) {
     const colorContainer = document.createElement('div');
     colorContainer.classList.add('color-options');
@@ -75,7 +84,6 @@ document.addEventListener("DOMContentLoaded", () => {
     desc.insertAdjacentElement('afterend', colorContainer);
   }
 
-  // Firebase FAVOURITES
   const userId = "guest";
   const favRef = db.ref(`favourites/${userId}/${product.id}`);
 
@@ -90,7 +98,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Firebase CART
   const cartRef = db.ref(`cart/${userId}/${product.id}`);
 
   addToCartBtn.textContent = "Add to Cart";
@@ -106,7 +113,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Show other products
   products.forEach((p) => {
     if (p.id === product.id) return;
 
@@ -118,12 +124,11 @@ document.addEventListener("DOMContentLoaded", () => {
       <p class="heart"><i class="fa-regular fa-heart"></i></p>
       <p class="description">${p.description}</p>
       <div class="inline">
-        <p class="price"><span>Rs</span>.${p.price.current} <span class="cut">${p.price.og}</span></p>
+        <p class="price"><span>Rs</span>.${p.price.current} <span class="cut">${p.price.og}</span>🔥</p>
         <button class="add"><i class="fa-solid fa-cart-shopping"></i></button>
       </div>
     `;
 
-    // Handle favs
     const heart = card.querySelector(".fa-heart");
     const thisFavRef = db.ref(`favourites/${userId}/${p.id}`);
 
@@ -138,7 +143,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-    // Add to cart
     card.querySelector(".add").addEventListener("click", () => {
       const thisCartRef = db.ref(`cart/${userId}/${p.id}`);
       thisCartRef.once("value").then((snap) => {
@@ -152,7 +156,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-    // Open detail on click
     card.querySelector(".img").addEventListener("click", () => {
       localStorage.setItem("selectedProductId", p.id);
       location.reload();

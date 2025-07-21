@@ -402,7 +402,10 @@ const products = [
         price:{current: 720, og: 1299}
     },
     {
-        img: ["./img/cutter 5 in 1.jpg"],
+        img: [
+            "./img/cutter 5 in 1.jpg", 
+            "./video/cutter.mp4"
+        ],
         description: "Vegetable Cutter with 5 Stainless Steel Blades — slice, dice, and shred with ease.",
         price:{current: 500, og: 850}
     },
@@ -412,7 +415,10 @@ const products = [
         price:{current: 250, og: 580}
     },
     {
-        img: ["./img/weight scale.jpg"],
+        img: [
+            "./img/weight scale.jpg", 
+            "./video/weight scale.mp4"
+        ],
         description: "Digital Kitchen Weight Scale — measure ingredients perfectly, accurate and easy-to-use.",
         price:{current: 820, og: 1299}
     },
@@ -427,52 +433,91 @@ const products = [
         price:{current: 1199, og: 1599}
     },
     {
-        img: ["./img/bottle blender.jpg"],
+        img: [
+            "./img/bottle blender.jpg",
+            "./img/bottle blender 2.jpg"
+        ],
         description: "Mini Juicer Blender — portable, USB-powered, and easy to carry anywhere.",
         price:{current: 860, og: 1299}
     },
     {
-        img: ["./img/toilet brush.jpg"],
+        img: [
+            "./img/toilet brush.jpg",
+            "./img/toilet brush 2.jpg",
+            "./img/toilet brush 3.jpg",
+        ],
         description: "Bathroom Cleaning Brush — non-slip handle and durable plastic bristles.",
         price:{current: 200, og: 499}
     },
     {
-        img: ["./img/bear wall cup .jpg"],
+        img: [
+            "./img/bear wall cup .jpg",
+            "./img/bear wall cup 2.jpg",
+            "./img/bear wall cup 3.jpg"
+        ],
         description: "Bear-Shaped Toothbrush Holder — wall-mounted cup, space-saving, and easy to install.",
         price:{current: 160, og: 380}
     },
     {
-        img: ["./img/bleach bowl.jpg"],
+        img: [
+            "./img/bleach bowl.jpg",
+            "./img/bleach bowl 2.jpg",
+            "./img/bleach bowl 3.jpg"
+        ],
         description: "6-in-1 Facial Mask Set — includes bowl, spatula, brush, puff, and spoon.",
         price:{current: 250, og: 560}
     },
     {
-        img: ["./img/nail filer.jpg"],
+        img: [
+            "./img/nail filer.jpg",
+            "./img/nail filer 2.jpg",
+            "./img/nail filer 3.jpg",
+            "./img/nail filer 4.jpg",
+        ],
         description: "Nail Buffer Set — smooth, shape, and shine with durable sponge files.",
         price:{current: 150, og: 360}
     },
     {
-        img: ["./img/anti lice comb.jpg"],
+        img: [
+            "./img/anti lice comb.jpg",
+            "./img/anti lice comb 2.jpg",
+            "./img/anti lice comb 3.jpg",
+            "./img/anti lice comb 4.jpg"
+        ],
         description: "Lice Removal Comb — strong grip and fine stainless steel bristles.",
         price:{current: 150, og: 360}
     },
     {
-        img: ["./img/brush.jpg"],
+        img: [
+            "./img/brush.jpg",
+            "./img/brush 2.jpg",
+            "./img/brush 3.jpg"
+        ],
         description: "Hair Dying Brush Kit — includes 3 tools for smooth and even dye application.",
         price:{current: 150, og: 360}
     },
     {
-        img: ["./img/foot filer.jpg"],
+        img: [
+            "./img/foot filer.jpg",
+            "./img/foot filer 2.jpg"
+        ],
         description: "4-in-1 Foot File — callus remover, scrubber, and pedicure tool for smooth feet.",
         price:{current: 150, og: 360}
     },
     {
-        img: ["./img/foot file.jpg"],
+        img: [
+            "./img/foot file.jpg",
+            "./img/foot file 2.jpg",
+        ],
         description: "Double-Sided Foot File — professional wooden callus remover for smooth feet.",
         price:{current: 200, og: 480}
     },
     {
-        img: ["./img/foot scraper.jpg"],
+        img: [
+            "./img/foot scraper.jpg",
+            "./img/foot scraper 2.jpg",
+            "./img/foot scraper 3.jpg",
+        ],
         description: "Stainless Steel Foot Care Tool — scraper, clipper, and exfoliator in one.",
         price:{current: 200, og: 480}
     },
@@ -507,7 +552,11 @@ const products = [
         price:{current: 1220, og: 1699}
     },
     {
-        img: ["./img/hanger.jpg"],
+        img: [
+            "./img/hanger.jpg",
+            "./img/hanger 2.jpg",
+            "./img/hanger 3.jpg",
+        ],
         description: "Multipurpose Plastic Children's Clothes Hangers – Pack of 10, Lightweight & Durable.",
         price:{current: 300, og: 700}
     },
@@ -527,12 +576,20 @@ const products = [
         price:{current: 650, og: 1000}
     },
     {
-        img: ["./img/bottle.jpg"],
+        img: [
+            "./img/bottle.jpg",
+            "./img/bottle 2.jpg"
+        ],
         description: "Plastic Single Flask Water Bottle – Lightweight & Durable (Random Color).",
         price:{current: 220, og: 600}
     },
     {
-        img: ["./img/mug blender.jpg"],
+        img: [
+            "./img/mug blender.jpg",
+            "./img/mug blender 2.jpg",
+            "./img/mug blender 3.jpg",
+            "./img/mug blender 4.jpg"
+        ],
         description: "Portable Crusher Juicer Blender with Straw Cup – Mini Cordless Juicing Cup for Home & Outdoor Use (Random Color).",
         price:{current: 1000, og: 1499}
     },
@@ -545,258 +602,97 @@ const products = [
               "./img/gift set sil 5.jpg"
             ],
         description: "Diamond Stone Jewelry Set – Includes Watch, Bracelet, Locket, Earrings & Ring – Silver, Premium Quality with Box.",
-        price:{current: 1500, og: 2000}
+        price:{current: 1500, og: 2000},
+        color:['1', '2', '3', '4', '5']
     },
-    // {
-    //     img: ["./img/gift set sil 2.jpg",]
-    //    //     description: "Diamond Stone Jewelry Set – Includes Watch, Bracelet, Locket, Earrings & Ring – Silver, Premium Quality with Box.",
-    //     price:{current: 1500, og: 2000}
-    // },
-    // {
-    //     img: ["./img/gift set sil 3.jpg",]
-    //    //     description: "Diamond Stone Jewelry Set – Includes Watch, Bracelet, Locket, Earrings & Ring – Silver, Premium Quality with Box.",
-    //     price:{current: 1500, og: 2000}
-    // },
-    // {
-    //     img: ["./img/gift set sil 4.jpg",]
-    //    //     description: "Diamond Stone Jewelry Set – Includes Watch, Bracelet, Locket, Earrings & Ring – Silver, Premium Quality with Box.",
-    //     price:{current: 1500, og: 2000}
-    // },
-    // {
-    //     img: ["./img/gift set sil 5.jpg",]
-    //    //     description: "Diamond Stone Jewelry Set – Includes Watch, Bracelet, Locket, Earrings & Ring – Silver, Premium Quality with Box.",
-    //     price:{current: 1500, og: 2000}
-    // },
-    // {
-    //     img: ["./img/gift set gold 1.jpg",]
-    //    //     description: "Diamond Stone Jewelry Set – Includes Watch, Bracelet, Locket, Earrings & Ring – Golden, Premium Quality with Box.",
-    //     price:{current: 1500, og: 2000}
-    // },
-    // {
-    //     img: ["./img/gift set gold 2.jpg",]
-    //    //     description: "Diamond Stone Jewelry Set – Includes Watch, Bracelet, Locket, Earrings & Ring – Golden, Premium Quality with Box.",
-    //     price:{current: 1500, og: 2000}
-    // },
-    // {
-    //     img: ["./img/gift set gold 3.jpg",]
-    //    //     description: "Diamond Stone Jewelry Set – Includes Watch, Bracelet, Locket, Earrings & Ring – Golden, Premium Quality with Box.",
-    //     price:{current: 1500, og: 2000}
-    // },
-    // {
-    //     img: ["./img/gift set gold 4.jpg",]
-    //    //     description: "Diamond Stone Jewelry Set – Includes Watch, Bracelet, Locket, Earrings & Ring – Golden, Premium Quality with Box.",
-    //     price:{current: 1500, og: 2000}
-    // },
-    // {
-    //     img: ["./img/gift set gold 5.jpg",]
-    //    //     description: "Diamond Stone Jewelry Set – Includes Watch, Bracelet, Locket, Earrings & Ring – Golden, Premium Quality with Box.",
-    //     price:{current: 1500, og: 2000}
-    // },
-    // {
-    //     img: ["./img/gift set gold 6.jpg",]
-    //    //     description: "Diamond Stone Jewelry Set – Includes Watch, Bracelet, Locket, Earrings & Ring – Golden, Premium Quality with Box.",
-    //     price:{current: 1500, og: 2000}
-    // },
-    // {
-    //     img: ["./img/gift set gold 7.jpg",]
-    //    //     description: "Diamond Stone Jewelry Set – Includes Watch, Bracelet, Locket, Earrings & Ring – Golden, Premium Quality with Box.",
-    //     price:{current: 1500, og: 2000}
-    // },
-    // {
-    //     img: ["./img/gift set gold 8.jpg",]
-    //    //     description: "Diamond Stone Jewelry Set – Includes Watch, Bracelet, Locket, Earrings & Ring – Golden, Premium Quality with Box.",
-    //     price:{current: 1500, og: 2000}
-    // },
-    // {
-    //     img: ["./img/gift set gold 9.jpg",]
-    //    //     description: "Diamond Stone Jewelry Set – Includes Watch, Bracelet, Locket, Earrings & Ring – Golden, Premium Quality with Box.",
-    //     price:{current: 1500, og: 2000}
-    // },
-    // {
-    //     img: ["./img/gift set gold 10.jpg",]
-    //    //     description: "Diamond Stone Jewelry Set – Includes Watch, Bracelet, Locket, Earrings & Ring – Golden, Premium Quality with Box.",
-    //     price:{current: 1500, og: 2000}
-    // },
-    // {
-    //     img: ["./img/aqua gents 1.jpg",]
-    //    //     description: "Aqua Gants Skamitan Watch – Stylish Dial, Quality Straps, Premium Look & Gift Box Included.",
-    //     price:{current: 750, og: 1199}
-    // },
-    // {
-    //     img: ["./img/aqua gents 2.jpg",]
-    //    //     description: "Aqua Gants Skamitan Watch – Stylish Dial, Quality Straps, Premium Look & Gift Box Included.",
-    //     price:{current: 750, og: 1199}
-    // },
-    // {
-    //     img: ["./img/aqua gents 3.jpg",]
-    //    //     description: "Aqua Gants Skamitan Watch – Stylish Dial, Quality Straps, Premium Look & Gift Box Included.",
-    //     price:{current: 750, og: 1199}
-    // },
-    // {
-    //     img: ["./img/aqua gents 4.jpg",]
-    //    //     description: "Aqua Gants Skamitan Watch – Stylish Dial, Quality Straps, Premium Look & Gift Box Included.",
-    //     price:{current: 750, og: 1199}
-    // },
-    // {
-    //     img: ["./img/aqua gents 5.jpg",]
-    //    //     description: "Aqua Gants Skamitan Watch – Stylish Dial, Quality Straps, Premium Look & Gift Box Included.",
-    //     price:{current: 750, og: 1199}
-    // },
-    // {
-    //     img: ["./img/aqua gents 6.jpg",]
-    //    //     description: "Aqua Gants Skamitan Watch – Stylish Dial, Quality Straps, Premium Look & Gift Box Included.",
-    //     price:{current: 750, og: 1199}
-    // },
-    // {
-    //     img: ["./img/aqua gents 7.jpg",]
-    //    //     description: "Aqua Gants Skamitan Watch – Stylish Dial, Quality Straps, Premium Look & Gift Box Included.",
-    //     price:{current: 750, og: 1199}
-    // },
-    // {
-    //     img: ["./img/aqua gents 8.jpg",]
-    //    //     description: "Aqua Gants Skamitan Watch – Stylish Dial, Quality Straps, Premium Look & Gift Box Included.",
-    //     price:{current: 750, og: 1199}
-    // },
-    // {
-    //     img: ["./img/aqua gents 9.jpg",]
-    //    //     description: "Aqua Gants Skamitan Watch – Stylish Dial, Quality Straps, Premium Look & Gift Box Included.",
-    //     price:{current: 750, og: 1199}
-    // },
-    // {
-    //     img: ["./img/aqua gents 10.jpg",]
-    //    //     description: "Aqua Gants Skamitan Watch – Stylish Dial, Quality Straps, Premium Look & Gift Box Included.",
-    //     price:{current: 750, og: 1199}
-    // },
-    // {
-    //     img: ["./img/aqua gents 11.jpg",]
-    //    //     description: "Aqua Gants Skamitan Watch – Stylish Dial, magnetic Milanese loop, Premium Look & Gift Box Included.",
-    //     price:{current: 750, og: 1199}
-    // },
-    // {
-    //     img: ["./img/aqua gents 12.jpg",]
-    //    //     description: "Aqua Gants Skamitan Watch – Stylish Dial, magnetic Milanese loop, Premium Look & Gift Box Included.",
-    //     price:{current: 750, og: 1199}
-    // },
-    // {
-    //     img: ["./img/aqua gents 13.jpg",]
-    //    //     description: "Aqua Gants Skamitan Watch – Stylish Dial, magnetic Milanese loop, Premium Look & Gift Box Included.",
-    //     price:{current: 750, og: 1199}
-    // },
-    // {
-    //     img: ["./img/couple watch 1.jpg",]
-    //    //     description: "Rolex Couple Watches – Slim Dial, Quality Strap, Elegant Design – Includes Gift Box (Limited Stock).",
-    //     price:{current: 1100, og: 1599}
-    // },
-    // {
-    //     img: ["./img/couple watch 2.jpg",]
-    //    //     description: "Rolex Couple Watches – Slim Dial, Quality Strap, Elegant Design – Includes Gift Box (Limited Stock).",
-    //     price:{current: 1100, og: 1599}
-    // },
-    // {
-    //     img: ["./img/couple watch 3.jpg",]
-    //    //     description: "Rolex Couple Watches – Slim Dial, Quality Strap, Elegant Design – Includes Gift Box (Limited Stock).",
-    //     price:{current: 1100, og: 1599}
-    // },
-    // {
-    //     img: ["./img/couple watch 4.jpg",]
-    //    //     description: "Rolex Couple Watches – Slim Dial, Quality Strap, Elegant Design – Includes Gift Box (Limited Stock).",
-    //     price:{current: 1100, og: 1599}
-    // },
-    // {
-    //     img: ["./img/SILICON RUBBER STREP 1.jpg",]
-    //    //     description: "D.LON Ladies Fancy Strap Collection – Stylish Silicone Strap Watches – Elegant Designs at a Discounted Price.",
-    //     price:{current: 600, og: 950}
-    // },
-    // {
-    //     img: ["./img/SILICON RUBBER STREP 2.jpg",]
-    //    //     description: "D.LON Ladies Fancy Strap Collection – Stylish Silicone Strap Watches – Elegant Designs at a Discounted Price.",
-    //     price:{current: 600, og: 950}
-    // },
-    // {
-    //     img: ["./img/SILICON RUBBER STREP 3.jpg",]
-    //    //     description: "D.LON Ladies Fancy Strap Collection – Stylish Silicone Strap Watches – Elegant Designs at a Discounted Price.",
-    //     price:{current: 600, og: 950}
-    // },
-    // {
-    //     img: ["./img/SILICON RUBBER STREP 4.jpg",]
-    //    //     description: "D.LON Ladies Fancy Strap Collection – Stylish Silicone Strap Watches – Elegant Designs at a Discounted Price.",
-    //     price:{current: 600, og: 950}
-    // },
-    // {
-    //     img: ["./img/SILICON RUBBER STREP 5.jpg",]
-    //    //     description: "D.LON Ladies Fancy Strap Collection – Stylish Silicone Strap Watches – Elegant Designs at a Discounted Price.",
-    //     price:{current: 600, og: 950}
-    // },
-    // {
-    //     img: ["./img/SILICON RUBBER STREP 6.jpg",]
-    //    //     description: "D.LON Ladies Fancy Strap Collection – Stylish Silicone Strap Watches – Elegant Designs at a Discounted Price.",
-    //     price:{current: 600, og: 950}
-    // },
-    // {
-    //     img: ["./img/MEN'S WATCH 1.jpg",]
-    //    //     description: "D.LON Men's Watch – Skeleton Dial, Glass Back, Push Button Lock, Stylish Design at a Reasonable Price.",
-    //     price:{current: 800, og: 1299}
-    // },
-    // {
-    //     img: ["./img/MEN'S WATCH 2.jpg",]
-    //    //     description: "D.LON Men's Watch – Skeleton Dial, Glass Back, Push Button Lock, Stylish Design at a Reasonable Price.",
-    //     price:{current: 800, og: 1299}
-    // },
-    // {
-    //     img: ["./img/MEN'S WATCH 3.jpg",]
-    //    //     description: "D.LON Men's Watch – Skeleton Dial, Glass Back, Push Button Lock, Stylish Design at a Reasonable Price.",
-    //     price:{current: 800, og: 1299}
-    // },
-    // {
-    //     img: ["./img/MEN'S WATCH 4.jpg",]
-    //    //     description: "D.LON Men's Watch – Skeleton Dial, Glass Back, Push Button Lock, Stylish Design at a Reasonable Price.",
-    //     price:{current: 800, og: 1299}
-    // },
-    // {
-    //     img: ["./img/MEN'S WATCH 5.jpg",]
-    //    //     description: "D.LON Men's Watch – Skeleton Dial, Glass Back, Push Button Lock, Stylish Design at a Reasonable Price.",
-    //     price:{current: 800, og: 1299}
-    // },
-    // {
-    //     img: ["./img/MEN'S WATCH 6.jpg",]
-    //    //     description: "D.LON Men's Watch – Skeleton Dial, Glass Back, Push Button Lock, Stylish Design at a Reasonable Price.",
-    //     price:{current: 800, og: 1299}
-    // },
-    // {
-    //     img: ["./img/MEN'S WATCH 7.jpg",]
-    //    //     description: "D.LON Men's Watch – Skeleton Dial, Glass Back, Push Button Lock, Stylish Design at a Reasonable Price.",
-    //     price:{current: 800, og: 1299}
-    // },
-    // {
-    //     img: ["./img/MEN'S WATCH 8.jpg",]
-    //    //     description: "D.LON Men's Watch – Skeleton Dial, Glass Back, Push Button Lock, Stylish Design at a Reasonable Price.",
-    //     price:{current: 800, og: 1299}
-    // },
-    // {
-    //     img: ["./img/STEE CHIN 1.jpg",]
-    //    //     description: "Rolex Gift Box Set – Steel Chain Watch with Button Lock, Matching Diamond Bracelet & Ring.",
-    //     price:{current: 1700, og: 2200}
-    // },
-    // {
-    //     img: ["./img/STEE CHIN 2.jpg",]
-    //    //     description: "Rolex Gift Box Set – Steel Chain Watch with Button Lock, Matching Diamond Bracelet & Ring.",
-    //     price:{current: 1700, og: 2200}
-    // },
-    // {
-    //     img: ["./img/STEE CHIN 3.jpg",]
-    //    //     description: "Rolex Gift Box Set – Steel Chain Watch with Button Lock, Matching Diamond Bracelet & Ring.",
-    //     price:{current: 1700, og: 2200}
-    // },
-    // {
-    //     img: ["./img/STEE CHIN 4.jpg",]
-    //    //     description: "Rolex Gift Box Set – Steel Chain Watch with Button Lock, Matching Diamond Bracelet & Ring.",
-    //     price:{current: 1700, og: 2200}
-    // },
-    // {
-    //     img: ["./img/STEE CHIN 5.jpg",]
-    //    //     description: "Rolex Gift Box Set – Steel Chain Watch with Button Lock, Matching Diamond Bracelet & Ring.",
-    //     price:{current: 1700, og: 2200}
-    // },
+    {
+        img: [
+            "./img/gift set gold 1.jpg",
+            "./img/gift set gold 2.jpg",
+            "./img/gift set gold 3.jpg",
+            "./img/gift set gold 4.jpg",
+            "./img/gift set gold 5.jpg",
+            "./img/gift set gold 6.jpg",
+            "./img/gift set gold 7.jpg",
+            "./img/gift set gold 8.jpg",
+            "./img/gift set gold 9.jpg",
+            "./img/gift set gold 10.jpg",
+        ],
+        description: "Diamond Stone Jewelry Set – Includes Watch, Bracelet, Locket, Earrings & Ring – Golden, Premium Quality with Box.",
+        price:{current: 1500, og: 2000},
+        color:['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+    },
+    {
+        img: [
+            "./img/aqua gents 1.jpg",
+            "./img/aqua gents 2.jpg",
+            "./img/aqua gents 3.jpg",
+            "./img/aqua gents 4.jpg",
+            "./img/aqua gents 5.jpg",
+            "./img/aqua gents 6.jpg",
+            "./img/aqua gents 7.jpg",
+            "./img/aqua gents 8.jpg",
+            "./img/aqua gents 9.jpg",
+            "./img/aqua gents 10.jpg",
+            "./img/aqua gents 11.jpg",
+            "./img/aqua gents 12.jpg",
+            "./img/aqua gents 13.jpg",
+        ],
+        description: "Aqua Gants Skamitan Watch – Stylish Dial, Quality Straps, Premium Look & Gift Box Included.",
+        price:{current: 750, og: 1199},
+        color:['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13']
+    },
+    {
+        img: [
+            "./img/couple watch 1.jpg",
+            "./img/couple watch 2.jpg",
+            "./img/couple watch 3.jpg",
+            "./img/couple watch 4.jpg",
+        ],
+        description: "Rolex Couple Watches – Slim Dial, Quality Strap, Elegant Design – Includes Gift Box (Limited Stock).",
+        price:{current: 1100, og: 1599},
+        color:['1', '2', '3', '4']
+    },
+    {
+        img: [
+            "./img/SILICON RUBBER STREP 1.jpg",
+            "./img/SILICON RUBBER STREP 2.jpg",
+            "./img/SILICON RUBBER STREP 3.jpg",
+            "./img/SILICON RUBBER STREP 4.jpg",
+            "./img/SILICON RUBBER STREP 5.jpg",
+            "./img/SILICON RUBBER STREP 6.jpg",
+        ],
+        description: "D.LON Ladies Fancy Strap Collection – Stylish Silicone Strap Watches – Elegant Designs at a Discounted Price.",
+        price:{current: 600, og: 950},
+        color:['1', '2', '3', '4', '5', '6']
+    },
+    {
+        img: [
+            "./img/MEN'S WATCH 1.jpg",
+            "./img/MEN'S WATCH 2.jpg",
+            "./img/MEN'S WATCH 3.jpg",
+            "./img/MEN'S WATCH 4.jpg",
+            "./img/MEN'S WATCH 5.jpg",
+            "./img/MEN'S WATCH 6.jpg",
+            "./img/MEN'S WATCH 7.jpg",
+            "./img/MEN'S WATCH 8.jpg",
+        ],
+        description: "D.LON Men's Watch – Skeleton Dial, Glass Back, Push Button Lock, Stylish Design at a Reasonable Price.",
+        price:{current: 800, og: 1299},
+        color:['1', '2', '3', '4', '5', '6', '7', '8']
+    },
+    {
+        img: [
+            "./img/STEE CHIN 1.jpg",
+            "./img/STEE CHIN 2.jpg",
+            "./img/STEE CHIN 3.jpg",
+            "./img/STEE CHIN 4.jpg",
+            "./img/STEE CHIN 5.jpg",
+        ],
+        description: "Rolex Gift Box Set – Steel Chain Watch with Button Lock, Matching Diamond Bracelet & Ring.",
+        price:{current: 1700, og: 2200},
+        color:['1', '2', '3', '4', '5']
+    },
 ];
 
 products.forEach((product, index) => {
