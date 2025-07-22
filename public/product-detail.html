@@ -15,9 +15,11 @@
     </div>
 
     <!-- PRODUCT DETAIL -->
+    <div class="flex">
     <div class="container">
+        <div class="sticky">
         <div class="slider-container">
-            <img id="slider-image" src="" alt="Product Image" />
+            <div class="media-holder"></div>
             <button id="prev">←</button>
             <button id="next">→</button>
         </div>
@@ -25,11 +27,13 @@
             <p id="prod-descrip"></p>
             <div class="line">
                 <p id="prod-price"></p>
-                <i class="fa-regular fa-heart"></i>
+                <button class="prod-addToCard">Add to Cart</button>
             </div>
-        <button class="prod-addToCard"></button>
+        </div>
         </div>
     </div>
+
+    <hr>
 
     <!-- CARD -->
     <div class="best">
@@ -44,6 +48,16 @@
             <button class="add"><i class="fa-solid fa-cart-shopping"></i></button>
         </div>
         </div> -->
+    </div>
+    </div>
+
+    <!-- CART BAR -->
+    <div class="cart-bar" id="cart-bar" style="display: none;">
+        <div>
+            <p>Items: <span id="item-count">0</span></p>
+            <p>PKR: <span id="total-price">0</span></p>
+        </div>
+        <button class="checkout-btn"><a href="cart.html">Checkout</a></button>
     </div>
     
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>

@@ -23,38 +23,79 @@ body {
   background-color: #0b4a66;
   color: #fff9f8;
   padding: 10px;
-  margin-bottom: 20px;
+  position: sticky;
+  top: 0;
+  z-index: 3;
 }
 
 /* DETAIL */
 .container {
   display: flex;
-  flex-direction: row;
   justify-content: baseline;
-  align-items: flex-start;
+  flex-direction: column;
   object-fit: cover;
+  width: 30%;
 }
 
-#slider-image, video {
-  width: 95%;
+.sticky {
+    z-index: 2;
+    position: sticky;
+    left: 20px;
+    top: 60px;
+}
+
+.slider-container {
+    position: relative;
+    object-fit: cover;
+    width: 100%;
+}
+
+.media-holder img,
+.media-holder video {
+  width: 100%;
+  height: 400px;
+}
+
+#prev,
+#next {
+  position: absolute;
+  top: 50%;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  color: white;
+  font-weight: bolder;
+  font-size: 20px;
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+  z-index: 2;
+  border-radius: 50%;
+}
+
+#prev {
+  left: 10px;
+}
+
+#next {
+  right: 10px;
+}
+
+#prev:hover,
+#next:hover {
+    transform: scale(1.02);
+    cursor: pointer;
 }
 
 .detail {
-  width: 60%;
   display: flex;
   flex-direction: column;
   justify-content: left;
-  font-size: larger;
+  font-size: large;
 }
 
 .detail div{
-    margin: 20px 0;
     display: flex;
     justify-content: space-between;
-}
-
-.detail div i {
-    color: red;
 }
 
 .detail button {
@@ -64,28 +105,49 @@ body {
     border: none;
     padding: 10px;
     border-radius: 30px;
+    width: 60%;
 }
 
 .detail button:hover {
-    width: 99%;
+    width: 61%;
     transform: scale(1.02);
     cursor: pointer;
 }
 
 .color-options {
-  margin-top: 10px;
-  font-size: 14px;
+  display: flex;
+  gap: 6px; 
+  flex-wrap: wrap;
 }
 
+
 .color-badge {
+    margin: 10px;
   display: inline-block;
+  white-space: nowrap;
   padding: 4px 8px;
-  margin: 5px 5px 0 0;
-  background-color: #eee;
+  background-color: #dddbdb;
   border-radius: 6px;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 500;
-  color: #333;
+  color: black;
+}
+
+.color-badge:hover {
+    transform: scale(1.02);
+    cursor: pointer;
+}
+
+.color-badge.active {
+  background-color: #0b4a66;
+  color: white;
+  border: 1px solid #0b4a66;
+}
+
+.flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 }
 
 /* CARD */
@@ -94,10 +156,12 @@ body {
     justify-content: space-evenly;
     align-items: center;
     flex-wrap: wrap;
+    width: 58%;
+    
 }
 
 .card{
-    width: clamp(100px, 30vw, 350px);
+    width: clamp(100px, 20vw, 200px);
     position: relative;
     z-index: 1;
     margin: clamp(20px, 4vw, 40px) clamp(10px, 3vw, 30px);
@@ -105,7 +169,7 @@ body {
 
 .img {
     width: 100%;
-    height: clamp(100px, 25vw, 300px);
+    height: clamp(100px, 20vw, 200px);
     object-fit: cover;
     cursor: pointer;
 }
@@ -154,22 +218,22 @@ body {
 }
 
 .price {
-    font-size: clamp(15px, 2vw + 1px, 20px);
+    font-size: clamp(15px, 2vw + 1px, 18px);
     font-weight: 600;
 }
 
 .price span {
-    font-size: clamp(12px, 2vw + 1px, 18px);
+    font-size: clamp(12px, 2vw + 1px, 16px);
 }
 
 .add {
     background-color: #4caf50;
     color: #fff9f8;
     border: none;
-    height: clamp(20px, 5vw, 50px); 
-    width: clamp(50px, 10vw, 90px);
+    height: clamp(20px, 5vw, 30px); 
+    width: clamp(50px, 10vw, 50px);
     border-radius: 30px;
-    font-size: clamp(15px, 2vw + 1px, 22px);
+    font-size: clamp(15px, 2vw + 1px, 18px);
 }
 
 .add:hover {
@@ -182,4 +246,41 @@ body {
     color: #686767;
     font-size: (12px, 2vw + 1px, 15px);
     font-weight: 300;
+}
+
+
+/* CART BAR */
+.cart-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff9f8;
+    color: #0b4a66;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: clamp(14px, 2vw, 18px);
+    z-index: 999;
+    box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.2);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    font-weight: bold;
+}
+
+.cart-bar .checkout-btn {
+    background-color: #4caf50;
+    color: #fff9f8;
+    border: none;
+    height: clamp(35px, 5vw, 50px); 
+    width: clamp(90px, 10vw, 120px);
+    border-radius: 30px;
+    font-size: clamp(15px, 2vw + 1px, 20px);
+    font-weight: bold;
+}
+
+.cart-bar .checkout-btn:hover {
+    transform: scale(1.05);
+    cursor: pointer;
 }

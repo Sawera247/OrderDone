@@ -36,18 +36,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const file = media[index];
     const ext = file.split('.').pop().toLowerCase();
 
-    productSlider.querySelectorAll("img, video").forEach(el => el.remove());
+    const mediaHolder = productSlider.querySelector(".media-holder");
+    mediaHolder.innerHTML = ""; 
 
     if (ext === "mp4") {
       const video = document.createElement("video");
       video.src = file;
       video.controls = true;
-      productSlider.appendChild(video);
+      mediaHolder.appendChild(video);
     } else {
       const img = document.createElement("img");
       img.src = file;
       img.id = "slider-image";
-      productSlider.appendChild(img);
+      mediaHolder.appendChild(img);
     }
   }
 
@@ -64,39 +65,41 @@ document.addEventListener("DOMContentLoaded", () => {
   showMedia(currentIndex);
 
   desc.textContent = product.description;
-  price.innerHTML = `<span>Rs</span>.${product.price.current} <span class="cut">${product.price.og}</span>`;
+  price.innerHTML = `<span>Rs</span>.${product.price.current} <span class="cut">${product.price.og}</span>🔥`;
 
   if (product.color && Array.isArray(product.color)) {
-    const colorContainer = document.createElement('div');
-    colorContainer.classList.add('color-options');
+  const colorContainer = document.createElement('div');
+  colorContainer.classList.add('color-options');
 
-    const colorTitle = document.createElement('p');
-    colorTitle.textContent = 'Available Colors:';
-    colorContainer.appendChild(colorTitle);
+  product.color.forEach((clr, index) => {
+    const span = document.createElement('span');
+    span.textContent = clr;
+    span.classList.add('color-badge');
+    
+    span.addEventListener("click", () => {
+      document.querySelectorAll('.color-badge').forEach(badge => {
+        badge.classList.remove('active');
+      });
 
-    product.color.forEach(clr => {
-      const span = document.createElement('span');
-      span.textContent = clr;
-      span.classList.add('color-badge');
-      colorContainer.appendChild(span);
+      span.classList.add('active');
+
+      currentIndex = index; 
+      showMedia(currentIndex);
+
+      selectedColor = clr;
+
+      document.querySelectorAll('.color-badge').forEach(b => b.classList.remove('selected-color'));
+      span.classList.add('selected-color');
     });
 
-    desc.insertAdjacentElement('afterend', colorContainer);
-  }
+    colorContainer.appendChild(span);
+  });
+
+  desc.insertAdjacentElement('afterend', colorContainer);
+}
 
   const userId = "guest";
   const favRef = db.ref(`favourites/${userId}/${product.id}`);
-
-  favRef.on("value", (snapshot) => {
-    heartIcon.classList.toggle("fa-solid", snapshot.exists());
-    heartIcon.classList.toggle("fa-regular", !snapshot.exists());
-  });
-
-  heartIcon.addEventListener("click", () => {
-    favRef.once("value").then((snap) => {
-      snap.exists() ? favRef.remove() : favRef.set(product);
-    });
-  });
 
   const cartRef = db.ref(`cart/${userId}/${product.id}`);
 
@@ -164,3 +167,34 @@ document.addEventListener("DOMContentLoaded", () => {
     bestDiv.appendChild(card);
   });
 });
+
+
+// CART BAR 
+function updateCartBar() {
+  const userId = "guest"; // Same as above
+  const cartRef = db.ref(`cart/${userId}`);
+
+  cartRef.on("value", (snapshot) => {
+    const cart = snapshot.val() || {};
+    let totalItems = 0;
+    let totalPrice = 0;
+
+    Object.values(cart).forEach(item => {
+      const quantity = item.quantity || 1;
+      totalItems += quantity;
+      totalPrice += item.price.current * quantity;
+    });
+
+    const itemCount = document.getElementById('item-count');
+    const totalPriceEl = document.getElementById('total-price');
+    const bar = document.getElementById('cart-bar');
+
+    if (itemCount && totalPriceEl && bar) {
+      itemCount.textContent = totalItems;
+      totalPriceEl.textContent = `Rs.${totalPrice}`;
+      bar.style.display = totalItems > 0 ? 'flex' : 'none';
+    }
+  });
+}
+
+updateCartBar();
