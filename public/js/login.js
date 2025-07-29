@@ -1,4 +1,3 @@
-// signup.js
 import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
@@ -16,7 +15,7 @@ document.getElementById('signup-form').addEventListener('submit', (e) => {
     .then(userCredential => {
       const uid = userCredential.user.uid;
 
-      // Save extra user data in Firebase Realtime Database
+      // Save additional user info in Realtime Database
       set(ref(db, 'users/' + uid), {
         name: name,
         email: email

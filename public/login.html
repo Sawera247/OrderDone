@@ -1,29 +1,26 @@
+<!-- login.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/login.css">
     <title>Order Done</title>
 </head>
 <body>
-  <h2>Create an Account</h2>
-
-  <form id="signup-form">
-    <input type="text" id="name" placeholder="Full Name" required><br>
+  <h2>Login</h2>
+  <form id="login-form">
     <input type="email" id="email" placeholder="Email" required><br>
     <input type="password" id="password" placeholder="Password" required><br>
-    <button type="submit">Sign Up</button>
+    <button type="submit">Login</button>
   </form>
 
-  <p>Already have an account? <a href="login.html">Login</a></p>
+  <p>Don't have an account? <a href="index.html">Sign up</a></p>
 
-  <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js"></script>
   <script src="firebase.js"></script>
-  <script src="index.html" type="module"></script>
+  <script src="login.js"></script>
 </body>
 </html>
