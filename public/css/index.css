@@ -23,10 +23,43 @@ body {
     flex-direction: column;
 }
 
+h2 {
+    color: #fff9f8;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
 #signup-form {
     margin: 10px;
     padding: 20px;
+    width: 400px;
     text-align: center;
-    border: 1px solid #000;
+    border: 2px solid #fff9f8;
     border-radius: 10px;
+}
+
+#signup-form input {
+    width: 100%;
+    border: none;
+    padding: 10px 100px 10px 5px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    font-size: medium;
+}
+
+#signup-form input::placeholder{
+    color: #0b4a66;
+}
+
+#signup-form button {
+    width: 100%;
+    border: none;
+    padding: 10px 0;
+    font-size: medium;
+    border-radius: 4px;
+    background-color: #0b4a66;
+    color: #fff9f8;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }

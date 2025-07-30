@@ -1,9 +1,8 @@
-// signup.js
+import { db } from "./firebase.js";
 import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { ref, set } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 const auth = getAuth();
-const db = getDatabase();
 
 document.getElementById('signup-form').addEventListener('submit', (e) => {
   e.preventDefault();
@@ -16,13 +15,11 @@ document.getElementById('signup-form').addEventListener('submit', (e) => {
     .then(userCredential => {
       const uid = userCredential.user.uid;
 
-      // Save extra user data in Firebase Realtime Database
       set(ref(db, 'users/' + uid), {
         name: name,
         email: email
       });
-
-      alert("Account created successfully!");
+      
       localStorage.setItem("userId", uid);
       window.location.href = "shop.html";
     })
