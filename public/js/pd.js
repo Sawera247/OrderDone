@@ -1,11 +1,22 @@
+import { products } from './product.js';
+import { db } from './firebase.js';
+import {
+  ref,
+  get,
+  set,
+  update,
+  onValue,
+  remove
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
 document.addEventListener("DOMContentLoaded", () => {
+  const userId = "guest";
+
   // Back Arrow Logic
   const backArrow = document.querySelector(".fa-arrow-left");
-  backArrow.addEventListener("click", () => {
-    window.history.back();
-  });
+  backArrow.addEventListener("click", () => window.history.back());
 
-  // Product Detail Logic
+  // Product Setup
   const productId = localStorage.getItem("selectedProductId");
   const product = products.find((p) => p.id === productId);
 
@@ -14,12 +25,10 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  const sliderImage = document.getElementById("slider-image");
   const prevBtn = document.getElementById("prev");
   const nextBtn = document.getElementById("next");
   const desc = document.getElementById("prod-descrip");
   const price = document.getElementById("prod-price");
-  const heartIcon = document.querySelector(".fa-heart");
   const addToCartBtn = document.querySelector(".prod-addToCard");
   const bestDiv = document.querySelector(".best");
   const productSlider = document.querySelector(".slider-container");
@@ -27,17 +36,12 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentIndex = 0;
   const media = product.img;
 
-  if (media.length <= 1) {
-    prevBtn.style.display = "none";
-    nextBtn.style.display = "none";
-  }
-
   function showMedia(index) {
     const file = media[index];
     const ext = file.split('.').pop().toLowerCase();
 
     const mediaHolder = productSlider.querySelector(".media-holder");
-    mediaHolder.innerHTML = ""; 
+    mediaHolder.innerHTML = "";
 
     if (ext === "mp4") {
       const video = document.createElement("video");
@@ -52,13 +56,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  nextBtn.addEventListener("click", () => {
-    currentIndex = (currentIndex + 1) % media.length;
-    showMedia(currentIndex);
-  });
+  if (media.length <= 1) {
+    prevBtn.style.display = "none";
+    nextBtn.style.display = "none";
+  }
 
   prevBtn.addEventListener("click", () => {
     currentIndex = (currentIndex - 1 + media.length) % media.length;
+    showMedia(currentIndex);
+  });
+
+  nextBtn.addEventListener("click", () => {
+    currentIndex = (currentIndex + 1) % media.length;
     showMedia(currentIndex);
   });
 
@@ -67,55 +76,46 @@ document.addEventListener("DOMContentLoaded", () => {
   desc.textContent = product.description;
   price.innerHTML = `<span>Rs</span>.${product.price.current} <span class="cut">${product.price.og}</span>🔥`;
 
+  // Add color selection if available
   if (product.color && Array.isArray(product.color)) {
-  const colorContainer = document.createElement('div');
-  colorContainer.classList.add('color-options');
+    const colorContainer = document.createElement('div');
+    colorContainer.classList.add('color-options');
 
-  product.color.forEach((clr, index) => {
-    const span = document.createElement('span');
-    span.textContent = clr;
-    span.classList.add('color-badge');
-    
-    span.addEventListener("click", () => {
-      document.querySelectorAll('.color-badge').forEach(badge => {
-        badge.classList.remove('active');
+    product.color.forEach((clr, index) => {
+      const span = document.createElement('span');
+      span.textContent = clr;
+      span.classList.add('color-badge');
+
+      span.addEventListener("click", () => {
+        document.querySelectorAll('.color-badge').forEach(b => b.classList.remove('active'));
+        span.classList.add('active');
+        currentIndex = index;
+        showMedia(currentIndex);
       });
 
-      span.classList.add('active');
-
-      currentIndex = index; 
-      showMedia(currentIndex);
-
-      selectedColor = clr;
-
-      document.querySelectorAll('.color-badge').forEach(b => b.classList.remove('selected-color'));
-      span.classList.add('selected-color');
+      colorContainer.appendChild(span);
     });
 
-    colorContainer.appendChild(span);
-  });
+    desc.insertAdjacentElement('afterend', colorContainer);
+  }
 
-  desc.insertAdjacentElement('afterend', colorContainer);
-}
-
-  const userId = "guest";
-  const favRef = db.ref(`favourites/${userId}/${product.id}`);
-
-  const cartRef = db.ref(`cart/${userId}/${product.id}`);
-
-  addToCartBtn.textContent = "Add to Cart";
+  // Add to Cart
   addToCartBtn.addEventListener("click", () => {
-    cartRef.once("value").then((snapshot) => {
-      if (snapshot.exists()) {
-        let item = snapshot.val();
-        item.quantity = item.quantity + 1;
-        cartRef.set(item);
-      } else {
-        cartRef.set({ ...product, quantity: 1 });
-      }
-    });
+  const cartItemRef = ref(db, `cart/${userId}/${product.id}`);
+  get(cartItemRef).then((snapshot) => {
+    if (snapshot.exists()) {
+      const item = snapshot.val();
+      update(cartItemRef, { quantity: item.quantity + 1 });
+    } else {
+      set(cartItemRef, {
+        ...product,
+        quantity: 1
+      });
+    }
   });
+});
 
+  // Similar Products
   products.forEach((p) => {
     if (p.id === product.id) return;
 
@@ -133,28 +133,31 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
 
     const heart = card.querySelector(".fa-heart");
-    const thisFavRef = db.ref(`favourites/${userId}/${p.id}`);
+    const favRef = ref(db, `favourites/${userId}/${p.id}`);
 
-    thisFavRef.on("value", (snap) => {
+    onValue(favRef, (snap) => {
       heart.classList.toggle("fa-solid", snap.exists());
       heart.classList.toggle("fa-regular", !snap.exists());
     });
 
     heart.addEventListener("click", () => {
-      thisFavRef.once("value").then((snap) => {
-        snap.exists() ? thisFavRef.remove() : thisFavRef.set(p);
+      get(favRef).then((snap) => {
+        if (snap.exists()) {
+          remove(favRef);
+        } else {
+          set(favRef, p);
+        }
       });
     });
 
     card.querySelector(".add").addEventListener("click", () => {
-      const thisCartRef = db.ref(`cart/${userId}/${p.id}`);
-      thisCartRef.once("value").then((snap) => {
+      const thisCartRef = ref(db, `cart/${userId}/${p.id}`);
+      get(thisCartRef).then((snap) => {
         if (snap.exists()) {
-          let item = snap.val();
-          item.quantity++;
-          thisCartRef.set(item);
+          const item = snap.val();
+          set(thisCartRef, { ...item, quantity: item.quantity + 1 });
         } else {
-          thisCartRef.set({ ...p, quantity: 1 });
+          set(thisCartRef, { ...p, quantity: 1 });
         }
       });
     });
@@ -166,20 +169,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     bestDiv.appendChild(card);
   });
+
+  updateCartBar();
 });
 
-
-// CART BAR 
+// Cart Bar
 function updateCartBar() {
-  const userId = "guest"; // Same as above
-  const cartRef = db.ref(`cart/${userId}`);
+  const userId = "guest";
+  const cartRef = ref(db, `cart/${userId}`);
 
-  cartRef.on("value", (snapshot) => {
-    const cart = snapshot.val() || {};
+  onValue(cartRef, (snapshot) => {
+    const data = snapshot.val() || {};
     let totalItems = 0;
     let totalPrice = 0;
 
-    Object.values(cart).forEach(item => {
+    Object.values(data).forEach(item => {
       const quantity = item.quantity || 1;
       totalItems += quantity;
       totalPrice += item.price.current * quantity;
@@ -196,5 +200,3 @@ function updateCartBar() {
     }
   });
 }
-
-updateCartBar();

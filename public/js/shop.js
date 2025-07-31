@@ -1,3 +1,11 @@
+import { products } from './product.js';
+import { db } from './firebase.js';import {
+  ref,
+  push,
+  onValue,
+  remove
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
 // NAVBAR MENU
 let menuBtn = document.querySelector('.menu-btn');
 let navLinks = document.querySelector('.nav-links');
@@ -41,12 +49,13 @@ shuffledProducts.forEach(product => {
     const productToAdd = {
       img: product.img,
       description: product.description,
-      price: product.price,
+      price: typeof product.price === "object"
+        ? product.price
+        : { current: parseInt(product.price.replace(/[^0-9]/g, '')) },
       quantity: 1
     };
-    db.ref('cart').push(productToAdd, (error) => {
-      if (!error) updateCartBar();
-    });
+    push(ref(db, 'cart'), productToAdd);
+    updateCartBar();
   });
 });
 
@@ -71,21 +80,21 @@ document.addEventListener('click', function (e) {
     if (icon.classList.contains('fa-regular')) {
       icon.classList.remove('fa-regular');
       icon.classList.add('fa-solid');
-      db.ref('favourites').push(product);
+      push(ref(db, 'favourites'), product);
     } else {
       icon.classList.remove('fa-solid');
       icon.classList.add('fa-regular');
 
-      // remove from Firebase
-      db.ref('favourites').once('value', snapshot => {
+      onValue(ref(db, 'favourites'), snapshot => {
         snapshot.forEach(child => {
           if (child.val().description === product.description) {
-            db.ref('favourites/' + child.key).remove();
+            remove(ref(db, 'favourites/' + child.key));
           }
         });
-      });
+      }, { onlyOnce: true });
     }
   }
+
   if (e.target.classList.contains('description') || e.target.classList.contains('img')) {
     const card = e.target.closest('.card');
     const desc = card.querySelector('.description');
@@ -127,12 +136,13 @@ searchBtn?.addEventListener('click', () => {
 
 // CART BAR 
 function updateCartBar() {
-  db.ref('cart').once('value', snapshot => {
-    const cart = snapshot.val() || {};
+  const cartRef = ref(db, 'cart');
+  onValue(cartRef, (snapshot) => {
+    const data = snapshot.val() || {};
     let totalItems = 0;
     let totalPrice = 0;
 
-    Object.values(cart).forEach(item => {
+    Object.values(data).forEach(item => {
       const quantity = item.quantity || 1;
       totalItems += quantity;
       totalPrice += item.price.current * quantity;
@@ -147,9 +157,8 @@ function updateCartBar() {
       totalPriceEl.textContent = totalPrice;
       bar.style.display = totalItems > 0 ? 'flex' : 'none';
     }
-  });
+  }, { onlyOnce: true });
 }
 
 // INIT
 updateCartBar();
-

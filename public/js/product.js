@@ -698,3 +698,5 @@ const products = [
 products.forEach((product, index) => {
   product.id = `p${index + 1}`;
 });
+
+export { products };

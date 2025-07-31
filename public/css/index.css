@@ -45,13 +45,16 @@ h2 {
     margin-bottom: 10px;
     border-radius: 4px;
     font-size: medium;
+    font-family: "Reddit Sans", sans-serif;
 }
 
 #signup-form input::placeholder{
     color: #0b4a66;
+    font-family: "Reddit Sans", sans-serif;
 }
 
 #signup-form button {
+    font-family: "Reddit Sans", sans-serif;
     width: 100%;
     border: none;
     padding: 10px 0;
@@ -62,4 +65,16 @@ h2 {
     font-weight: 600;
     letter-spacing: 1px;
     text-transform: uppercase;
+}
+
+p {
+    color: #0b4a66;
+    text-align: center;
+    
+}
+
+p a {
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-left:7px;
 }

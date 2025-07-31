@@ -69,12 +69,15 @@ while (count < 6) {
   addBtn.addEventListener('click', (event) => {
   event.stopPropagation(); // Stops card click event
 
-  const productToAdd = {
-    img: product.img,
-    description: product.description,
-    price: product.price,
-    quantity: 1
-  };
+const productToAdd = {
+  img: product.img,
+  description: product.description,
+  price: typeof product.price === "object"
+    ? product.price
+    : { current: parseInt(product.price.replace(/[^0-9]/g, '')) },
+  quantity: 1
+};
+
 
   db.ref('cart').push(productToAdd, error => {
     if (error) {

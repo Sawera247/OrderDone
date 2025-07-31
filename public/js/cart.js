@@ -1,11 +1,23 @@
-//  NAVBAR MENU
+import { app, db } from './firebase.js';
+import {
+  ref,
+  get,
+  update,
+  remove,
+  onValue 
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+// Dummy user (until login is added)
+const userId = "guestUser";
+
+// NAVBAR MENU
 let menuBtn = document.querySelector('.menu-btn');
 let navLinks = document.querySelector('.nav-links');
 menuBtn.addEventListener('click', () => {
   navLinks.classList.toggle('mobile-menu');
 });
 
-//  CART
+// CART 
 const cartItemsDiv = document.getElementById('cart-items');
 const totalItemsText = document.getElementById('total-items');
 const subtotalText = document.getElementById('subtotal');
@@ -14,9 +26,15 @@ const nextBtn = document.getElementById('next-btn');
 const orderForm = document.querySelector('.order-form');
 
 function renderCart() {
-  db.ref('cart').once('value', (snapshot) => {
+  console.log("renderCart() triggered...");
+
+  
+  const userId = "guest";
+  const cartRef = ref(db, "cart/" + userId);
+
+  onValue(cartRef, (snapshot) => {
     const data = snapshot.val();
-    cartItemsDiv.innerHTML = '';
+    console.log("Cart data received:", data);
 
     if (!data) {
       cartItemsDiv.innerHTML = `<p class="empty-msg">Your cart is empty.</p>`;
@@ -28,12 +46,12 @@ function renderCart() {
 
     let subtotal = 0;
     let itemCount = 0;
-    const keys = Object.keys(data);
 
-    keys.forEach((key, index) => {
+    Object.keys(data).forEach((key) => {
       const item = data[key];
       const quantity = item.quantity || 1;
-      const totalPrice = item.price.current * quantity;
+      const price = typeof item.price === "object" ? (item.price.current || 0) : 0;
+      const totalPrice = price * quantity;
       subtotal += totalPrice;
       itemCount += quantity;
 
@@ -44,7 +62,7 @@ function renderCart() {
         <div class="line">
           <p class="desc">${item.description}</p>
           <div class="more">
-            <p class="prc"><span>Rs. </span>${item.price.current}</p>
+            <p class="prc"><span>Rs. </span>${price}</p>
             <button onclick="updateQty('${key}', -1)" class="pm"><i class="fa-solid fa-minus"></i></button>
             <span>${quantity}</span>
             <button onclick="updateQty('${key}', 1)" class="pm"><i class="fa-solid fa-plus"></i></button>
@@ -62,22 +80,24 @@ function renderCart() {
 }
 
 function updateQty(key, change) {
-  db.ref(`cart/${key}`).once('value', (snapshot) => {
+  get(ref(db, `cart/${userId}/${key}`)).then((snapshot) => {
     const item = snapshot.val();
     if (!item) return;
     const newQty = (item.quantity || 1) + change;
     if (newQty < 1) {
       removeItem(key);
     } else {
-      db.ref(`cart/${key}`).update({ quantity: newQty });
-      renderCart();
+      update(ref(db, `cart/${userId}/${key}`), { quantity: newQty }).then(() => {
+        renderCart();
+      });
     }
   });
 }
 
 function removeItem(key) {
-  db.ref(`cart/${key}`).remove();
-  renderCart();
+  remove(ref(db, `cart/${userId}/${key}`)).then(() => {
+    renderCart();
+  });
 }
 
 nextBtn.addEventListener('click', () => {
@@ -105,7 +125,7 @@ orderForm.addEventListener('submit', (e) => {
   const block = document.getElementById('block').value;
   const zip = document.getElementById('zip').value;
 
-  db.ref('cart').once('value', (snapshot) => {
+  get(ref(db, `cart/${userId}`)).then((snapshot) => {
     const cart = snapshot.val();
     if (!cart) return;
 
@@ -115,9 +135,10 @@ orderForm.addEventListener('submit', (e) => {
 
     Object.values(cart).forEach((item, i) => {
       const qty = item.quantity || 1;
-      subtotal += item.price.current * qty;
+      const price = item.price?.current || 0;
+      subtotal += price * qty;
       totalItems += qty;
-      message += `${i + 1}. ${item.description} - Rs.${item.price.current} x ${qty}%0A`;
+      message += `${i + 1}. ${item.description} - Rs.${price} x ${qty}%0A`;
     });
 
     const finalTotal = subtotal + 250;
@@ -130,6 +151,12 @@ orderForm.addEventListener('submit', (e) => {
     message += `Name: ${name}%0AGmail: ${gmail}%0APhone: ${number}%0ACity: ${city}%0AAddress: ${address}%0ABlock / House No: ${block}%0AZip: ${zip}%0APayment: Cash on Delivery`;
 
     window.open(`https://wa.me/923142273233?text=${message}`, "_blank");
+
+    // Optional: Clear the cart after placing order
+    remove(ref(db, `cart/${userId}`)).then(() => {
+      alert("Order placed! Your cart has been cleared.");
+      window.location.reload();
+    });
   });
 });
 
