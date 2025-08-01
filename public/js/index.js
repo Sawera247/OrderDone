@@ -10,6 +10,10 @@ document.getElementById('signup-form').addEventListener('submit', (e) => {
   const name = document.getElementById('name').value;
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
+  const emailError = document.getElementById('email-error');
+
+  emailError.style.display = 'none';
+  emailError.textContent = '';
 
   createUserWithEmailAndPassword(auth, email, password)
     .then(userCredential => {
@@ -24,6 +28,22 @@ document.getElementById('signup-form').addEventListener('submit', (e) => {
       window.location.href = "shop.html";
     })
     .catch(error => {
-      alert("Signup failed: " + error.message);
+      let message = "";
+      switch (error.code) {
+        case 'auth/email-already-in-use':
+          message = "Email already in use";
+          break;
+        case 'auth/invalid-email':
+          message = "Please enter a valid email address";
+          break;
+        case 'auth/weak-password':
+          message = "Password should be at least 6 characters";
+          break;
+        default:
+          message = error.message;
+      };
+
+      emailError.textContent = message;
+      emailError.style.display = 'block';
     });
 });

@@ -8,7 +8,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 // Dummy user (until login is added)
-const userId = "guestUser";
+const userId = localStorage.getItem("userId") || "guest";
 
 // NAVBAR MENU
 let menuBtn = document.querySelector('.menu-btn');
@@ -26,16 +26,13 @@ const nextBtn = document.getElementById('next-btn');
 const orderForm = document.querySelector('.order-form');
 
 function renderCart() {
-  console.log("renderCart() triggered...");
-
-  
-  const userId = "guest";
+  const userId = localStorage.getItem("userId") || "guest";
   const cartRef = ref(db, "cart/" + userId);
+
+  cartItemsDiv.innerHTML = '';
 
   onValue(cartRef, (snapshot) => {
     const data = snapshot.val();
-    console.log("Cart data received:", data);
-
     if (!data) {
       cartItemsDiv.innerHTML = `<p class="empty-msg">Your cart is empty.</p>`;
       document.getElementById('cart-summary').style.display = 'none';
@@ -58,7 +55,7 @@ function renderCart() {
       const card = document.createElement('div');
       card.className = 'card';
       card.innerHTML = `
-        <img src="${item.img}" class="item-img" />
+        <img src="${Array.isArray(item.img) ? item.img[0] : item.img}" class="item-img" />
         <div class="line">
           <p class="desc">${item.description}</p>
           <div class="more">
@@ -87,17 +84,13 @@ function updateQty(key, change) {
     if (newQty < 1) {
       removeItem(key);
     } else {
-      update(ref(db, `cart/${userId}/${key}`), { quantity: newQty }).then(() => {
-        renderCart();
-      });
+      update(ref(db, `cart/${userId}/${key}`), { quantity: newQty });
     }
   });
 }
 
 function removeItem(key) {
-  remove(ref(db, `cart/${userId}/${key}`)).then(() => {
-    renderCart();
-  });
+  remove(ref(db, `cart/${userId}/${key}`))
 }
 
 nextBtn.addEventListener('click', () => {
@@ -114,16 +107,44 @@ orderForm.addEventListener('submit', (e) => {
   const number = document.getElementById('number').value;
   const cityInput = document.getElementById('city');
   const city = cityInput.value.toLowerCase();
-
-  if (city !== "karachi") {
-    alert("Sorry, we currently only deliver in Karachi.");
-    cityInput.value = '';
-    return;
-  }
-
   const address = document.getElementById('address').value;
   const block = document.getElementById('block').value;
   const zip = document.getElementById('zip').value;
+
+  const errorP = document.getElementById('any-error');
+  errorP.style.display = 'none';
+  errorP.textContent = '';
+  errorP.style.color = 'red';
+
+  if (!name || !gmail || !number || !city || !address || !block || !zip) {
+    errorP.textContent = "All fields are required.";
+    errorP.style.display = 'block';
+    return;
+  }
+
+  if (!/^[a-zA-Z\s]+$/.test(name)) {
+    errorP.textContent = "Name should only contain letters.";
+    errorP.style.display = 'block';
+    return;
+  }
+
+  if (!/^\S+@\S+\.\S+$/.test(gmail)) {
+    errorP.textContent = "Invalid email format.";
+    errorP.style.display = 'block';
+    return;
+  }
+
+  if (!/^03\d{9}$/.test(number)) {
+    errorP.textContent = "Enter a valid 11-digit Pakistani number (e.g., 03XXXXXXXXX)";
+    errorP.style.display = 'block';
+    return;
+  }
+
+  if (city !== "karachi") {
+    errorP.textContent = "Sorry, we currently only deliver in Karachi.";
+    errorP.style.display = 'block';
+    return;
+  }
 
   get(ref(db, `cart/${userId}`)).then((snapshot) => {
     const cart = snapshot.val();
@@ -161,3 +182,5 @@ orderForm.addEventListener('submit', (e) => {
 });
 
 renderCart();
+window.updateQty = updateQty;
+window.removeItem = removeItem;

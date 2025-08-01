@@ -23,10 +23,13 @@ shuffledProducts.forEach(product => {
   const card = document.createElement('div');
   card.classList.add('card');
 
-  card.addEventListener('click', () => {
-    localStorage.setItem("selectedProductId", product.id);
-    window.location.href = "product-detail.html";
+  card.addEventListener('click', (e) => {
+    if (e.target.classList.contains('img')) {
+      localStorage.setItem("selectedProductId", product.id);
+      window.location.href = "product-detail.html";
+    }
   });
+
 
   card.innerHTML = `
     <img src="${product.img[0]}" alt="" class="img">
@@ -38,14 +41,15 @@ shuffledProducts.forEach(product => {
         <span class="cut">${product.price.og}</span>
         <span>🔥</span>
       </p>
-      <button class="add"><i class="fa-solid fa-cart-shopping"></i></button>
+      <button class="add" type="button"><i class="fa-solid fa-cart-shopping"></i></button>
     </div>
   `;
 
   bestContainer.appendChild(card);
 
   const addBtn = card.querySelector('.add');
-  addBtn.addEventListener('click', () => {
+  addBtn.addEventListener('click', (e) => {
+    e.stopPropagation(); 
     const productToAdd = {
       img: product.img,
       description: product.description,
@@ -54,7 +58,8 @@ shuffledProducts.forEach(product => {
         : { current: parseInt(product.price.replace(/[^0-9]/g, '')) },
       quantity: 1
     };
-    push(ref(db, 'cart'), productToAdd);
+    const userId = localStorage.getItem("userId") || "guest";
+    push(ref(db, `cart/${userId}`), productToAdd);
     updateCartBar();
   });
 });
@@ -80,15 +85,20 @@ document.addEventListener('click', function (e) {
     if (icon.classList.contains('fa-regular')) {
       icon.classList.remove('fa-regular');
       icon.classList.add('fa-solid');
-      push(ref(db, 'favourites'), product);
-    } else {
+
+      const userId = localStorage.getItem("userId") || "guest";
+      const favRef = ref(db, `favourites/${userId}`);
+      push(favRef, product);
+    }else {
       icon.classList.remove('fa-solid');
       icon.classList.add('fa-regular');
 
-      onValue(ref(db, 'favourites'), snapshot => {
+      const userId = localStorage.getItem("userId") || "guest";
+      const favRef = ref(db, `favourites/${userId}`);
+      onValue(favRef, snapshot => {
         snapshot.forEach(child => {
           if (child.val().description === product.description) {
-            remove(ref(db, 'favourites/' + child.key));
+            remove(ref(db, `favourites/${userId}/${child.key}`));
           }
         });
       }, { onlyOnce: true });
@@ -136,14 +146,18 @@ searchBtn?.addEventListener('click', () => {
 
 // CART BAR 
 function updateCartBar() {
-  const cartRef = ref(db, 'cart');
+  const userId = localStorage.getItem("userId") || "guest";
+  const cartRef = ref(db, `cart/${userId}`);
   onValue(cartRef, (snapshot) => {
     const data = snapshot.val() || {};
     let totalItems = 0;
     let totalPrice = 0;
 
     Object.values(data).forEach(item => {
-      const quantity = item.quantity || 1;
+    const quantity = item.quantity || 1;
+
+    if (!item.price || typeof item.price.current !== 'number') return;
+
       totalItems += quantity;
       totalPrice += item.price.current * quantity;
     });

@@ -227,6 +227,7 @@ body {
     white-space: nowrap;
     text-overflow: ellipsis;
     font-size: clamp(12px, 2vw + 1px, 16px);
+    cursor: pointer;
 }
 
 .card .description.full {

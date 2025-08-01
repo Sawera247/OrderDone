@@ -78,3 +78,9 @@ p a {
     text-transform: uppercase;
     margin-left:7px;
 }
+
+#email-error {
+    text-align: left;
+    margin-bottom: 10px;
+    color: rgb(177, 0, 0);
+}

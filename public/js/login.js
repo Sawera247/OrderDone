@@ -7,6 +7,10 @@ document.getElementById('login-form').addEventListener('submit', (e) => {
 
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
+  const emailError = document.getElementById('email-error');
+
+  emailError.style.display = 'none';
+  emailError.textContent = '';
 
   signInWithEmailAndPassword(auth, email, password)
     .then(userCredential => {
@@ -16,6 +20,25 @@ document.getElementById('login-form').addEventListener('submit', (e) => {
       window.location.href = "shop.html";
     })
     .catch(error => {
-      alert("Login failed: " + error.message);
+      let message = "";
+      switch (error.code) {
+        case 'auth/invalid-email':
+          message = "Please enter a valid email address";
+          break;
+        case 'auth/invalid-credential':
+          message = "Incorrect email or password";
+          break;
+        case 'auth/wrong-password':
+          message = "Incorrect password";
+          break;
+        case 'auth/user-not-found':
+          message = "No account found with this email";
+          break;
+        default:
+          message = error.message;
+      };
+
+      emailError.textContent = message;
+      emailError.style.display = 'block';
     });
 });

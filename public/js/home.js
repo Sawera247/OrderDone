@@ -1,3 +1,11 @@
+import { products } from './product.js';
+import { db } from './firebase.js';import {
+  ref,
+  push,
+  onValue,
+  remove
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
 // NAVBAR MENU
 let menuBtn = document.querySelector('.menu-btn');
 let navLinks = document.querySelector('.nav-links');
@@ -43,9 +51,11 @@ while (count < 6) {
   const card = document.createElement('div');
   card.classList.add('card');
 
-  card.addEventListener('click', () => {
-    localStorage.setItem("selectedProductId", product.id);
-    window.location.href = "product-detail.html";
+  card.addEventListener('click', (e) => {
+    if (e.target.classList.contains('img')) {
+      localStorage.setItem("selectedProductId", product.id);
+      window.location.href = "product-detail.html";
+    }
   });
 
   card.innerHTML = `
@@ -58,7 +68,7 @@ while (count < 6) {
         <span class="cut">${product.price.og}</span>
         <span>🔥</span>
       </p>
-      <button class="add"><i class="fa-solid fa-cart-shopping"></i></button>
+      <button class="add" type="button"><i class="fa-solid fa-cart-shopping"></i></button>
     </div>
   `;
 
@@ -66,28 +76,21 @@ while (count < 6) {
   count++;
 
   const addBtn = card.querySelector('.add');
-  addBtn.addEventListener('click', (event) => {
-  event.stopPropagation(); // Stops card click event
-
-const productToAdd = {
-  img: product.img,
-  description: product.description,
-  price: typeof product.price === "object"
-    ? product.price
-    : { current: parseInt(product.price.replace(/[^0-9]/g, '')) },
-  quantity: 1
-};
-
-
-  db.ref('cart').push(productToAdd, error => {
-    if (error) {
-      alert("Error adding to cart");
-    } else {
+  addBtn.addEventListener('click', (e) => {
+      e.stopPropagation(); 
+      const productToAdd = {
+        img: product.img,
+        description: product.description,
+        price: typeof product.price === "object"
+          ? product.price
+          : { current: parseInt(product.price.replace(/[^0-9]/g, '')) },
+        quantity: 1
+      };
+      const userId = localStorage.getItem("userId") || "guest";
+      push(ref(db, `cart/${userId}`), productToAdd);
       updateCartBar();
-    }
-  });
-});
-}
+    });
+};
 
 // HEART & DESCRIPTION TOGGLE
 document.addEventListener('click', function (e) {
@@ -110,31 +113,43 @@ document.addEventListener('click', function (e) {
     if (icon.classList.contains('fa-regular')) {
       icon.classList.remove('fa-regular');
       icon.classList.add('fa-solid');
-      db.ref('favourites').push(product);
-    } else {
+
+      const userId = localStorage.getItem("userId") || "guest";
+      const favRef = ref(db, `favourites/${userId}`);
+      push(favRef, product);
+    }else {
       icon.classList.remove('fa-solid');
       icon.classList.add('fa-regular');
 
-      // remove from Firebase
-      db.ref('favourites').once('value', snapshot => {
+      const userId = localStorage.getItem("userId") || "guest";
+      const favRef = ref(db, `favourites/${userId}`);
+      onValue(favRef, snapshot => {
         snapshot.forEach(child => {
           if (child.val().description === product.description) {
-            db.ref('favourites/' + child.key).remove();
+            remove(ref(db, `favourites/${userId}/${child.key}`));
           }
         });
-      });
+      }, { onlyOnce: true });
     }
+  }
+  
+  if (e.target.classList.contains('description') || e.target.classList.contains('img')) {
+    const card = e.target.closest('.card');
+    const desc = card.querySelector('.description');
+    desc.classList.toggle('full');
   }
 });
 
 // CART BAR 
 function updateCartBar() {
-  db.ref('cart').once('value', snapshot => {
-    const cart = snapshot.val() || {};
+  const userId = localStorage.getItem("userId") || "guest";
+  const cartRef = ref(db, `cart/${userId}`);
+  onValue(cartRef, (snapshot) => {
+    const data = snapshot.val() || {};
     let totalItems = 0;
     let totalPrice = 0;
 
-    Object.values(cart).forEach(item => {
+    Object.values(data).forEach(item => {
     const quantity = item.quantity || 1;
 
     if (!item.price || typeof item.price.current !== 'number') return;
@@ -152,8 +167,8 @@ function updateCartBar() {
       totalPriceEl.textContent = totalPrice;
       bar.style.display = totalItems > 0 ? 'flex' : 'none';
     }
-  });
+  }, { onlyOnce: true });
 }
 
-// Initial call
+// INIT
 updateCartBar();

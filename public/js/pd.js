@@ -10,7 +10,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  const userId = "guest";
+  const userId = localStorage.getItem("userId") || "guest";
 
   // Back Arrow Logic
   const backArrow = document.querySelector(".fa-arrow-left");
@@ -112,6 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
         quantity: 1
       });
     }
+    updateCartBar();
   });
 });
 
@@ -175,16 +176,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Cart Bar
 function updateCartBar() {
-  const userId = "guest";
+  const userId = localStorage.getItem("userId") || "guest";
   const cartRef = ref(db, `cart/${userId}`);
-
   onValue(cartRef, (snapshot) => {
     const data = snapshot.val() || {};
     let totalItems = 0;
     let totalPrice = 0;
 
     Object.values(data).forEach(item => {
-      const quantity = item.quantity || 1;
+    const quantity = item.quantity || 1;
+
+    if (!item.price || typeof item.price.current !== 'number') return;
+
       totalItems += quantity;
       totalPrice += item.price.current * quantity;
     });
@@ -195,8 +198,11 @@ function updateCartBar() {
 
     if (itemCount && totalPriceEl && bar) {
       itemCount.textContent = totalItems;
-      totalPriceEl.textContent = `Rs.${totalPrice}`;
+      totalPriceEl.textContent = totalPrice;
       bar.style.display = totalItems > 0 ? 'flex' : 'none';
     }
-  });
+  }, { onlyOnce: true });
 }
+
+// INIT
+updateCartBar();
